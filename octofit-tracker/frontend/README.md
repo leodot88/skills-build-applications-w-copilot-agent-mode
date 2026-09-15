@@ -1,3 +1,12 @@
+## Environment
+
+Define `VITE_CODESPACE_NAME` in `.env.local` with the GitHub Codespace name so the presentation tier can call the API:
+
+```env
+VITE_CODESPACE_NAME=your-codespace-name
+```
+
+The frontend requests `https://${VITE_CODESPACE_NAME}-8000.app.github.dev/api/[component]/`. When the variable is unset, it safely falls back to the same-origin `/api` path and displays a configuration notice.
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
