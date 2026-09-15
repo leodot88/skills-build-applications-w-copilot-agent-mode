@@ -1,7 +1,11 @@
 import { formatDate, useCollection } from './api'
 
+const activitiesEndpoint = import.meta.env.VITE_CODESPACE_NAME?.trim()
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+  : '/api/activities/'
+
 function Activities() {
-  const { data, loading, error } = useCollection('activities')
+  const { data, loading, error } = useCollection(activitiesEndpoint)
 
   return (
     <section className="page-section">

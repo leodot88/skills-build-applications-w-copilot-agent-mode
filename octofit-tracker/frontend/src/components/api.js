@@ -14,7 +14,7 @@ export function normalizeCollection(payload) {
   return []
 }
 
-export function useCollection(resource) {
+export function useCollection(endpoint) {
   const [state, setState] = useState({ data: [], loading: true, error: '' })
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export function useCollection(resource) {
 
     async function load() {
       try {
-        const response = await fetch(`${apiBaseUrl}/${resource}/`, { signal: controller.signal })
+        const response = await fetch(endpoint, { signal: controller.signal })
         if (!response.ok) throw new Error(`Request failed (${response.status})`)
         const payload = await response.json()
         setState({ data: normalizeCollection(payload), loading: false, error: '' })
@@ -35,7 +35,7 @@ export function useCollection(resource) {
 
     load()
     return () => controller.abort()
-  }, [resource])
+  }, [endpoint])
 
   return state
 }
